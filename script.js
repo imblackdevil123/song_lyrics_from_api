@@ -1,9 +1,11 @@
 const form = document.getElementById('form');
 const search = document.getElementById('search');
+//input field
 const result = document.getElementById('result');
 const more = document.getElementById('more');
 
 const apiURL = 'https://api.lyrics.ovh';
+//data.next and data.prev gives url
 
 // Search by song or artist
 async function searchSongs(term) {
@@ -27,7 +29,7 @@ function showData(data) {
         .join('')}
     </ul>
   `;
-
+  
   if (data.prev || data.next) {
     more.innerHTML = `
       ${
@@ -46,7 +48,7 @@ function showData(data) {
   }
 }
 
-// Get prev and next songs
+// Get prev and next songs + remove cors error by having heroku proxy
 async function getMoreSongs(url) {
   const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
   const data = await res.json();
